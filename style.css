@@ -17,7 +17,6 @@ h1{
 
 main{
     background-color: blue;
-    max-width: 1023px;
     margin: 0px  auto;
     display: flex;
     flex-wrap: wrap;
@@ -34,6 +33,7 @@ main div{
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 17px;
 }
 
 main div img{
