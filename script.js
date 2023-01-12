@@ -31,14 +31,32 @@ function posicionarCartas(){
     for(let i = 0; i < numeroDeCartas/2; i++){
         cartas.push("var"+i);
         cartas.push("var"+i);
+        console.log(cartas);
     }
 
-    // Embearalha as cartas no vetor
+    // Embaralha as cartas no vetor
     cartas.sort(comparador);
 
+    // Laço de repetição que aciciona as cartas seguindo a ordem do vetor dentro do espaço desejado
     for(let  i = 0; i < cartas.length; i++){
-        elementoMain.innerHTML +=  '<div><img src="./imagens/gifs/'+ cartas[i] + '.gif" alt="" class="'+ cartas[i]+'" ></div>';
+        elementoMain.innerHTML +=  `
+        <div class="carta" onclick="virarCarta(this)">
+            <div class="carta-fechada face">
+                <img src="./imagens/costas-carta.png" alt="">
+            </div>
+            <div class="carta-aberta face">
+                <img src="./imagens/gifs/${cartas[i]}.gif" alt="">
+            </div>
+        </div>`;
     }
+}
+
+function virarCarta(cartaSelecionada){
+
+    cartaSelecionada.querySelector(".carta-aberta").classList.add("carta-aberta-selecionada");
+    cartaSelecionada.querySelector(".carta-fechada").classList.add("carta-fechada-selecionada");
+
+
 }
 
 solicitaCartas();

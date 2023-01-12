@@ -23,9 +23,16 @@ main{
     justify-content: space-between;
 }
 
-main div{
+.carta{
     height: 146px;
     width: 117px;
+    margin: 17px;
+    position: relative;
+}
+
+.face{
+    width: 100%;
+    height: 100%;
     background-color: #A7E9AF;
     border-radius: 5px;
     border: 1px solid #99CEA8;
@@ -33,8 +40,26 @@ main div{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 17px;
+    position: absolute;
+    backface-visibility: hidden;
+    transition: all .5s;
+    transform-style: preserve-3d;
 }
+
+.carta-aberta {
+    transform: rotateY(180deg);
+
+}
+
+.carta-aberta-selecionada {
+    transform: rotateY(0deg);
+}
+
+
+.carta-fechada-selecionada {
+    transform: rotateY(-180deg);
+}
+
 
 main div img{
     width: 100px;
