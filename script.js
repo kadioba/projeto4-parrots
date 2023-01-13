@@ -49,11 +49,11 @@ function posicionarCartas(){
     // Laço de repetição que aciciona as cartas seguindo a ordem do vetor dentro do espaço desejado
     for(let  i = 0; i < cartas.length; i++){
         elementoMain.innerHTML +=  `
-        <div class="carta" onclick="virarCarta(this)">
-            <div class="carta-fechada face">
+        <div class="carta" data-test="card" onclick="virarCarta(this)">
+            <div class="carta-fechada face" data-test="face-down-image">
                 <img src="./imagens/costas-carta.png" alt="">
             </div>
-            <div class="carta-aberta face">
+            <div class="carta-aberta face" data-test="face-up-image">
                 <img class="${cartas[i]}" src="./imagens/gifs/${cartas[i]}.gif" alt="">
             </div>
         </div>`;
