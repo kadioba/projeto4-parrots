@@ -74,6 +74,12 @@ function virarCarta(cartaSelecionada){
 
         verificaCartas();
     }
+    
+    if( cartasRestantes < 1){
+        setTimeout(jogoFinalizado, 100);
+    }
+
+    
 }
 
 function verificaCartas(){
@@ -117,10 +123,8 @@ function fecharCartasErradas(){
     }
 }
 
-function verificaCartasRestantes(){
-    if(cartasRestantes == 1){
-        alert(`Você ganhou em ${numeroJogadas} jogadas!`);
-    }
+function jogoFinalizado(){
+    alert(`Você ganhou em ${numeroJogadas} jogadas!`);
 }
 
 solicitaCartas();
