@@ -1,8 +1,15 @@
 
 // Variavel que vai receber as cartas que entrarão em jogo
 let cartas = [];
+
 // Variavel que recebe o nuemero de cartas que vão ser usadadas no jogo
 let numeroDeCartas;
+
+let numeroCartasSelecionadas = 0;
+
+let cartasRestantes;
+
+let numeroJogadas = 0;
 
 const elementoMain = document.querySelector("main");
 
@@ -18,6 +25,8 @@ function solicitaCartas(){
         // Pergunta novamente o numero de cartas
         numeroDeCartas = prompt("Digite com quantas cartas você quer jogar:");
     }
+
+    cartasRestantes  = numeroDeCartas;
 
     // Variavel que vai definir o tamanho da main para disposição de cartas
     const tamanhoJogo = (numeroDeCartas/2) * 151;
@@ -45,7 +54,7 @@ function posicionarCartas(){
                 <img src="./imagens/costas-carta.png" alt="">
             </div>
             <div class="carta-aberta face">
-                <img src="./imagens/gifs/${cartas[i]}.gif" alt="">
+                <img class="${cartas[i]}" src="./imagens/gifs/${cartas[i]}.gif" alt="">
             </div>
         </div>`;
     }
@@ -53,10 +62,65 @@ function posicionarCartas(){
 
 function virarCarta(cartaSelecionada){
 
-    cartaSelecionada.querySelector(".carta-aberta").classList.add("carta-aberta-selecionada");
-    cartaSelecionada.querySelector(".carta-fechada").classList.add("carta-fechada-selecionada");
+    numeroJogadas++;
 
+    if(numeroCartasSelecionadas < 2){
 
+        numeroCartasSelecionadas++
+        cartaSelecionada.classList.add("carta-selecionada");
+
+        cartaSelecionada.querySelector(".carta-aberta").classList.add("carta-aberta-selecionada");
+        cartaSelecionada.querySelector(".carta-fechada").classList.add("carta-fechada-selecionada");
+
+        verificaCartas();
+    }
+}
+
+function verificaCartas(){
+
+    if (numeroCartasSelecionadas == 2){
+        let cartasSelecionadasTemp = document.querySelectorAll(".carta-selecionada");
+
+        let classeCartaSelecionada = [];
+
+        for(let i = 0; i < 2; i++){
+            classeCartaSelecionada[i]=cartasSelecionadasTemp[i].querySelector(".carta-aberta-selecionada img").classList;
+        }
+
+        if(classeCartaSelecionada[0][0] == classeCartaSelecionada[1][0]){
+            let cartasCorretas = document.querySelectorAll(".carta-selecionada")
+            for(let i =0; i < 2; i++){
+                cartasCorretas[i].classList.add("acerto");
+                cartasCorretas[i].classList.remove("carta-selecionada");
+            }
+            
+            numeroCartasSelecionadas  = 0;
+            cartasRestantes  = cartasRestantes  - 2;
+        }
+
+        else{
+            setTimeout(fecharCartasErradas, 1000);
+        }
+
+    }
+    console.log(cartasRestantes);
+
+}
+
+function fecharCartasErradas(){
+    let cartasErradas = document.querySelectorAll(".carta-selecionada");
+    for(let i =0; i < 2; i++){
+        cartasErradas[i].querySelector(".carta-aberta-selecionada").classList.remove("carta-aberta-selecionada");
+        cartasErradas[i].querySelector(".carta-fechada-selecionada").classList.remove("carta-fechada-selecionada");
+        cartasErradas[i].classList.remove("carta-selecionada");
+        numeroCartasSelecionadas  = 0;
+    }
+}
+
+function verificaCartasRestantes(){
+    if(cartasRestantes == 1){
+        alert(`Você ganhou em ${numeroJogadas} jogadas!`);
+    }
 }
 
 solicitaCartas();
