@@ -43,7 +43,6 @@ function posicionarCartas(){
     for(let i = 0; i < numeroDeCartas/2; i++){
         cartas.push("var"+i);
         cartas.push("var"+i);
-        console.log(cartas);
     }
 
     // Embaralha as cartas no vetor
@@ -107,7 +106,6 @@ function verificaCartas(){
         }
 
     }
-    console.log(cartasRestantes);
 
 }
 
