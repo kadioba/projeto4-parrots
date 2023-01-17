@@ -11,6 +11,9 @@ let cartasRestantes;
 
 let numeroJogadas = 0;
 
+let contador = 0;
+let intervaloContador;
+
 const elementoMain = document.querySelector("main");
 
 // Funcao que solicita numero de cartas e define o tamanho da area util
@@ -58,6 +61,7 @@ function posicionarCartas(){
             </div>
         </div>`;
     }
+    relogio();
 }
 
 function virarCarta(cartaSelecionada){
@@ -73,13 +77,7 @@ function virarCarta(cartaSelecionada){
         cartaSelecionada.querySelector(".carta-fechada").classList.add("carta-fechada-selecionada");
 
         verificaCartas();
-    }
-    
-    if( cartasRestantes < 1){
-        setTimeout(jogoFinalizado, 100);
-    }
-
-    
+    } 
 }
 
 function verificaCartas(){
@@ -124,7 +122,7 @@ function fecharCartasErradas(){
 }
 
 function jogoFinalizado(){
-    alert(`Você ganhou em ${numeroJogadas} jogadas!`);
+    alert(`Você ganhou em ${numeroJogadas} jogadas! A duração do jogo foi de ${contador} segundos!`);
 }
 
 solicitaCartas();
@@ -132,4 +130,34 @@ posicionarCartas();
 
 function comparador() { 
     return Math.random() - 0.5;
+}
+
+function relogio(){
+    intervaloContador = setInterval(contaSegundo, 1000)
+}
+
+function contaSegundo(){
+    contador++;
+    document.querySelector("h2").innerHTML = contador;
+    if( cartasRestantes < 1){
+        clearInterval(intervaloContador);
+        jogoFinalizado();
+        reiniciaJogo();
+    }
+}
+
+function reiniciaJogo(){
+    let inputFinal = prompt("Você gostaria de reiniciar a partida?");
+    while(inputFinal != "sim" && inputFinal != "não"){
+        inputFinal = prompt("Você gostaria de reiniciar a partida?");
+    }
+    if(inputFinal == "sim"){
+        cartas = [];
+        solicitaCartas();
+        document.querySelector("main").innerHTML = "";
+        posicionarCartas();
+
+    }
+    else if(inputFinal == "não"){
+    }
 }
